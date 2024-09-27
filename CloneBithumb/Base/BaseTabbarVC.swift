@@ -22,7 +22,7 @@ class BaseTabbarVC: UITabBarController, UITabBarControllerDelegate {
     
     /// NavigationController가 아닌 것 같아서 상단헤더뷰 만듬.
     private func setHeaderView() {
-        var headerViewHeight: CGFloat = 100
+        var headerViewHeight: CGFloat = 60
         let headerView = HeaderView()
         
         headerView.translatesAutoresizingMaskIntoConstraints = false
@@ -41,7 +41,7 @@ class BaseTabbarVC: UITabBarController, UITabBarControllerDelegate {
         self.delegate = self
     }
     
-    /// 이름 짓기 힘들어서
+    ///  페이지이동이 지금 가장 힘들다. 
     private func setTabbarControllers() {
         let oneVC = OneVC()
         let twoVC = TwoVC()
