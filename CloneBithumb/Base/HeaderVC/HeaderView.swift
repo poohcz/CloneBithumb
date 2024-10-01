@@ -109,31 +109,36 @@ class HeaderView: UIView {
         
         output.moveToOneVC
             .subscribe(onNext: { [weak self] in
-                self?.navigateToVC(viewController: OneVC())
+                guard let self else { return }
+                self.navigateToVC(viewController: OneVC())
             })
             .disposed(by: disposeBag)
         
         output.moveToTwoVC
             .subscribe(onNext: { [weak self] in
-                self?.navigateToVC(viewController: TwoVC())
+                guard let self else { return }
+                self.navigateToVC(viewController: TwoVC())
             })
             .disposed(by: disposeBag)
         
         output.moveToThreeVC
             .subscribe(onNext: { [weak self] in
-                self?.navigateToVC(viewController: ThreeVC())
+                guard let self else { return }
+                self.navigateToVC(viewController: ThreeVC())
             })
             .disposed(by: disposeBag)
         
         output.moveToFourVC
             .subscribe(onNext: { [weak self] in
-                self?.navigateToVC(viewController: FourVC())
+                guard let self else { return }
+                self.navigateToVC(viewController: FourVC())
             })
             .disposed(by: disposeBag)
         
         output.moveToFiveVC
             .subscribe(onNext: { [weak self] in
-                self?.navigateToVC(viewController: FiveVC())
+                guard let self else { return }
+                self.navigateToVC(viewController: FiveVC())
             })
             .disposed(by: disposeBag)
     }
