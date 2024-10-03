@@ -107,10 +107,10 @@ class HeaderView: UIView {
         
         let output = headerViewModel.transform(input: input)
         
-        output.moveToOneVC
+        output.moveToExchangeVC
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
-                self.navigateToVC(viewController: OneVC())
+                self.navigateToVC(viewController: ExchangeVC())
             })
             .disposed(by: disposeBag)
         

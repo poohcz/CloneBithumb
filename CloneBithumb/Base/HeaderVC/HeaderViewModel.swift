@@ -21,7 +21,7 @@ class HeaderViewModel: ViewModel {
     
     /// 헤더뷰에서 나가는건 각 버튼을 누른 후 페이지 이동
     struct Output {
-        let moveToOneVC: Observable<Void>
+        let moveToExchangeVC: Observable<Void>
         let moveToTwoVC: Observable<Void>
         let moveToThreeVC: Observable<Void>
         let moveToFourVC: Observable<Void>
@@ -30,7 +30,7 @@ class HeaderViewModel: ViewModel {
     
     
     func transform(input: Input) -> Output {
-        return Output(moveToOneVC: input.firstBtnTapped, moveToTwoVC: input.secondBtnTapped, moveToThreeVC: input.thirdBtnTapped, moveToFourVC: input.fourthBtnTapped, moveToFiveVC: input.fifthBtnTapped)
+        return Output(moveToExchangeVC: input.firstBtnTapped, moveToTwoVC: input.secondBtnTapped, moveToThreeVC: input.thirdBtnTapped, moveToFourVC: input.fourthBtnTapped, moveToFiveVC: input.fifthBtnTapped)
     }
 }
 

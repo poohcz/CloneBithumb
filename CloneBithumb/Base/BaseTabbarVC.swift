@@ -41,18 +41,18 @@ class BaseTabbarVC: UITabBarController, UITabBarControllerDelegate {
     
     ///  페이지이동이 지금 가장 힘들다. 
     private func setTabbarControllers() {
-        let oneVC = OneVC()
+        let exchangeVC = ExchangeVC()
         let twoVC = TwoVC()
         let threeVC = ThreeVC()
         let fourVC = FourVC()
         let fiveVC = FiveVC()
-        oneVC.tabBarItem = UITabBarItem(title: "One", image: UIImage(named: ""), tag: 0)
+        exchangeVC.tabBarItem = UITabBarItem(title: "One", image: UIImage(named: ""), tag: 0)
         twoVC.tabBarItem = UITabBarItem(title: "Two", image: UIImage(named: ""), tag: 1)
         threeVC.tabBarItem = UITabBarItem(title: "Three", image: UIImage(named: ""), tag: 2)
         fourVC.tabBarItem = UITabBarItem(title: "Four", image: UIImage(named: ""), tag: 3)
         fiveVC.tabBarItem = UITabBarItem(title: "Five", image: UIImage(named: ""), tag: 4)
         
-        self.viewControllers = [oneVC, twoVC, threeVC, fourVC, fiveVC]
+        self.viewControllers = [exchangeVC, twoVC, threeVC, fourVC, fiveVC]
     }
     
     /// NavigationController가 아닌 것 같아서 상단헤더뷰 만듬.
