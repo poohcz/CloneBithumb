@@ -15,7 +15,6 @@ class ExchangeViewModel {
     let disposeBag: DisposeBag = DisposeBag()
     
     func getExchangeData() {
-        print("김동률2")
         let url = "https://api.bithumb.com/v1/market/all"
         let params: [String: String] = [:]
         
@@ -26,6 +25,11 @@ class ExchangeViewModel {
             }, onError: { error in
                 print("getExchangeDataError::", error)
             })
-            .dispose()
+        
+            .disposed(by: disposeBag)
+            /*
+             .disposed(by: disposeBag) <-- 일반적인 구독해제 방식(자동)
+             .dispose() <-- 즉시해제한다. 그래서 ExchangeVC에 Data가 전달이 되지 않았다.(수동)
+             */
     }
 }

@@ -24,47 +24,43 @@ class ExchangeVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         getList()
+        view.backgroundColor = .white
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         setTableView()
-        view.backgroundColor = .red
     }
     
     private func setTableView() {
+        exchangeTableView.backgroundColor = .white
         exchangeTableView.frame = view.bounds
-        exchangeTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        exchangeTableView.dataSource = self
-        exchangeTableView.delegate = self
+        exchangeTableView.register(ExchangeTableViewCell.self, forCellReuseIdentifier: ExchangeTableViewCell.identifier)
         view.addSubview(exchangeTableView)
         exchangeTableView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func getList() {
-        print("김동률1")
         // 항상 subscribe, disposed 까먹지 말것.
         viewModel.getExchangeData()
         viewModel.exchangeData
-            .observe(on: MainScheduler.instance) // UI변경은 메인쓰레드에서
-            .subscribe(onNext: { [weak self] exchangeData in
-                guard let self = self else { return }
-                self.updateVC(data: exchangeData)
-            })
+            .observe(on: MainScheduler.instance)
+            .bind(to: exchangeTableView.rx.items(
+                cellIdentifier: ExchangeTableViewCell.identifier, cellType: ExchangeTableViewCell.self
+            )) { index, model, cell in
+                cell.titleKorLabel.text = model.korean_name
+                cell.titleEngLabel.text = model.english_name
+            }
             .disposed(by: disposeBag)
     }
     
-    private func updateVC(data: [ExchangeModel]) {
-        print("Data:::", data)
-    }
+    /*
+     //            .subscribe(onNext: { [weak self] exchangeData in
+     //                guard let self = self else { return }
+     //                self.updateVC(data: exchangeData)
+     //            })
+                   .bind기능안에 subscribe가 들어있다. 바로 바인드가 가능하므로, tableviewdelegate선언을 할 필요가 없다. 다른 vc에서 할때 연습해보자.
+     */
     
 }
 
-extension ExchangeVC: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 50
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
-        return cell
-    }
-}

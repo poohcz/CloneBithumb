@@ -12,5 +12,6 @@ struct ExchangeModel: Codable {
     let market: String
     let korean_name: String
     let english_name: String
-    let market_warning: String
+    // 하... nil이 들어올줄은... optinal로 처리
+    let market_warning: String?
 }

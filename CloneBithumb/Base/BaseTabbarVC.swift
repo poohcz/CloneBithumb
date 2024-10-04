@@ -27,6 +27,7 @@ class BaseTabbarVC: UITabBarController, UITabBarControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("viewWillAppear")
+        adjustViewFrames()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -78,12 +79,14 @@ class BaseTabbarVC: UITabBarController, UITabBarControllerDelegate {
     }
         
     private func adjustViewFrames() {
+        let safeAreaTopInset = view.safeAreaInsets.top
+
         for viewController in viewControllers ?? [] {
             viewController.view.frame = CGRect(
                 x: 0,
-                y: headerViewHeight,
+                y: safeAreaTopInset + headerViewHeight,
                 width: view.frame.width,
-                height: view.frame.height - headerViewHeight - tabBar.frame.height
+                height: view.frame.height - safeAreaTopInset - headerViewHeight
             )
         }
     }

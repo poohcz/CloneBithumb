@@ -26,37 +26,34 @@ class NetworkManager: NSObject {
             
             var request = URLRequest(url: urlComponents.url!)
             request.httpMethod = "GET"
-            print("김동률3")
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 // 네트워크 오류일때
                 if let error = error {
                     observer.onError(error)
-                    print("김동률3-1:", error)
+                    print("네트워크에러:", error)
                     return
                 }
                 
                 // 빈값일때
                 guard let data = data else {
-                    print("김동률3-2:")
+                    print("빈값에러:", error)
                     observer.onError(NSError(domain: "EmptyData", code: 0000, userInfo: nil))
                     return
                 }
                 
                 do {
-                    print("김동률4")
                     let decodedData = try JSONDecoder().decode(T.self, from: data)
                     observer.onNext(decodedData)
                     observer.onCompleted()
                 } catch {
+                    print("파싱이 안될때에러:", error) //파싱 에러
                     observer.onError(error)
                 }
             }
             
             task.resume()
             
-            return Disposables.create {
-                task.cancel()
-            }
+            return Disposables.create {}
         }
     }
 }
