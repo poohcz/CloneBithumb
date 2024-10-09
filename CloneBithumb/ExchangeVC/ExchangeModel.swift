@@ -14,4 +14,6 @@ struct ExchangeModel: Codable {
     let english_name: String
     // 하... nil이 들어올줄은... optinal로 처리
     let market_warning: String?
+    
+    // candles
 }

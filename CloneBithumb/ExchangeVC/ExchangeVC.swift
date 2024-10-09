@@ -42,6 +42,7 @@ class ExchangeVC: BaseVC {
     
     private func getList() {
         // 항상 subscribe, disposed 까먹지 말것.
+        // ExchangeData가져오기
         viewModel.getExchangeData()
         viewModel.exchangeData
             .observe(on: MainScheduler.instance)
@@ -52,7 +53,13 @@ class ExchangeVC: BaseVC {
                 cell.titleEngLabel.text = model.english_name
             }
             .disposed(by: disposeBag)
+        
+        // ExchangeData가져오기
+        viewModel.getCandle()
+        
+        
     }
+    
     
     /*
      //            .subscribe(onNext: { [weak self] exchangeData in
